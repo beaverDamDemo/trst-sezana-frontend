@@ -1,0 +1,146 @@
+<nb-layout>
+  <nb-layout-header fixed></nb-layout-header>
+
+  <nb-layout-column>
+    <div
+      class="content"
+      role="main"
+      style="display: flex; justify-content: center"
+    >
+      <nb-card accent="info">
+        <nb-card-body>
+          <nb-form-field>
+            <form [formGroup]="myFormGroup" (ngSubmit)="onSubmit()">
+              <div>
+                <nb-select
+                  placeholder="Select store"
+                  [(selected)]="selectedStore"
+                  required
+                >
+                  <nb-option *ngFor="let s of existingStores" [value]="s">{{
+                    s.name
+                  }}</nb-option>
+                </nb-select>
+                <div *ngIf="selectedStore != undefined; else elseBlock">
+                  <input
+                    nbInput
+                    type="text"
+                    disabled
+                    [value]="selectedStore.storeAddress"
+                  />
+                  <input
+                    nbInput
+                    type="text"
+                    disabled
+                    [value]="selectedStore.storePhoneNumber"
+                  />
+                </div>
+                <ng-template #elseBlock>
+                  <input
+                    nbInput
+                    type="text"
+                    disabled
+                    value=""
+                    style="opacity: 0.4"
+                  />
+                  <input
+                    nbInput
+                    type="text"
+                    disabled
+                    value=""
+                    style="opacity: 0.4"
+                  />
+                </ng-template>
+              </div>
+              <input nbInput type="date" formControlName="currentDate" />
+              <input
+                nbInput
+                type="text"
+                placeholder="Served by"
+                formControlName="servedBy"
+                required
+              />
+              <input
+                nbInput
+                type="email"
+                placeholder="Email"
+                formControlName="email"
+                required
+                email
+              />
+              <div style="display: flex; flex-direction: row">
+                <input
+                  nbInput
+                  [nbDatepicker]="datepicker"
+                  placeholder="select Sport Package Date"
+                  formControlName="sportPackageDate"
+                  required
+                />
+              </div>
+              <nb-datepicker #datepicker></nb-datepicker>
+              <input
+                nbInput
+                type="number"
+                placeholder="Monthly charge"
+                formControlName="monthlyCharge"
+                required
+              />
+              <input
+                nbInput
+                type="number"
+                placeholder="Upfront fee"
+                formControlName="upfrontFee"
+                required
+              />
+              <nb-select
+                placeholder="Installments of payment"
+                formControlName="installmentsOfPayment"
+                required
+              >
+                <nb-option value="1">1</nb-option>
+                <nb-option value="2">2</nb-option>
+                <nb-option value="3">3</nb-option>
+                <nb-option value="4">4</nb-option>
+                <nb-option value="5">5</nb-option>
+              </nb-select>
+              <textarea
+                nbInput
+                type="text"
+                placeholder="Other handy information"
+                formControlName="otherHandyInformation"
+              ></textarea>
+            </form>
+          </nb-form-field>
+        </nb-card-body>
+        <nb-card-footer>
+          <div style="display: flex">
+            <button
+              nbButton
+              status="success"
+              (click)="onSubmit()"
+              [disabled]="!myFormGroup.valid || selectedStore == undefined"
+            >
+              SUBMIT
+            </button>
+            <span style="flex-grow: 1"></span>
+            <button nbButton status="danger" (click)="onResetForm()">
+              RESET
+            </button>
+          </div>
+        </nb-card-footer>
+      </nb-card>
+    </div>
+    <div style="display: flex">
+      <span style="flex-grow: 1"></span>
+      <button nbButton status="primary" (click)="onGetObrazecLast()">
+        Get Obrazec last
+      </button>
+      <button nbButton status="warning" (click)="onGetObrazecAll()">
+        Get Obrazec ALL
+      </button>
+    </div>
+    <a href="https://stackoverflow.blog/2022/09/15/why-the-number-input-is-the-worst-input/">article about input type="number"</a>
+  </nb-layout-column>
+
+  <nb-layout-footer fixed> </nb-layout-footer
+></nb-layout>

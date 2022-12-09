@@ -1,0 +1,9 @@
+input, nb-select {
+    margin-bottom: 5px;
+}
+button {
+    margin: 5px;
+}
+.ng-touched.ng-dirty.ng-invalid {
+    border-color: crimson;
+}
